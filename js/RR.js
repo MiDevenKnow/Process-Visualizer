@@ -262,7 +262,7 @@ window.onload = function () {
             }
         }
 
-        if(check){
+        if(values[0][2] != 0){
             readyQueue.push(values[0]);
         }
  
