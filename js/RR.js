@@ -270,21 +270,19 @@ window.onload = function () {
             //console.log(readyQueue);
 
             let count = 0;
-            let bruk = false;
-            // while(readyQueue.length<1 && !isComplete()){
-            //   count++;
-            //   for(let i = 0; i < values.length; i++){
-            //     if(values[i][2] != 0 && time+count == process[1]){
-            //         let empty_space = ['Idle Time','',count,0];
-            //         order.push(empty_space);
-            //         readyQueue.push(process[i]);
-            //         bruk = true;
-            //     }
-            //   }
-            //   if(bruk){
-            //     break;
-            //   }
-            // }
+            let index = values.indexOf(firstProcess)+1;
+            while(readyQueue.length<1 && !isComplete()){
+              count++;
+          
+                if(values[index][2] != 0 && time+count == values[index][1]){
+                    let empty_space = ['Idle Time','',count];
+                    order.push(empty_space);
+                    readyQueue.push(values[index]);
+                    time += count;
+                    totalBurstTimeAfterEachProces.push(time);
+                    break;
+                }
+            }
             
             index = values.indexOf(readyQueue[0]);
           
