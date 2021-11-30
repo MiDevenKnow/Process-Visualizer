@@ -359,13 +359,13 @@ window.onload = function () {
             AnimationSpace.append(chart)
             charttime='<td class="animation-time" style="display: table-cell; width:'+((order[i][2]*50)+55)+'px; border-radius: 3px; text-align:left; height: 20px;">'+totalBurstTimeAfterEachProces[i]+' secs</td>'
             AnimationSpaceTime.append(charttime)
-            if(order[i][1]!=null){
-                turnaround_time_vals.push(totalBurstTimeAfterEachProces[i+1]-order[i][1])
-                waiting_time_vals.push((totalBurstTimeAfterEachProces[i+1]-order[i][1])-order[i][2])
-                turnaround_time.push([order[i][0],totalBurstTimeAfterEachProces[i+1]-order[i][1]])
-                waiting_time.push([order[i][0],(totalBurstTimeAfterEachProces[i+1]-order[i][1])-order[i][2]])
-                //console.log(totalBurstTimeAfterEachProces[i+1]-order[i][1],totalBurstTimeAfterEachProces[i],order[i][2])
-            }
+            // if(order[i][1]!=null){
+            //     turnaround_time_vals.push(totalBurstTimeAfterEachProces[i+1]-order[i][1])
+            //     waiting_time_vals.push((totalBurstTimeAfterEachProces[i+1]-order[i][1])-order[i][2])
+            //     turnaround_time.push([order[i][0],totalBurstTimeAfterEachProces[i+1]-order[i][1]])
+            //     waiting_time.push([order[i][0],(totalBurstTimeAfterEachProces[i+1]-order[i][1])-order[i][2]])
+            //     //console.log(totalBurstTimeAfterEachProces[i+1]-order[i][1],totalBurstTimeAfterEachProces[i],order[i][2])
+            // }
             await sleep(order[i][2]*1000)
         }
         // console.log(order)
@@ -373,41 +373,41 @@ window.onload = function () {
         // console.log(turnaround_time)
         // console.log(waiting_time)
 
-        var avg_turnaround=turnaround_time_vals.reduce((a, b) => a + b, 0)/turnaround_time_vals.length;
-        var avg_waitingtime=waiting_time_vals.reduce((a, b) => a + b, 0)/waiting_time_vals.length
-        avgtimes=$('#resultsChart #AvgTimes');
-        wavgtimes_html='<h5 style="color:white;">Average Waiting Time: '+avg_waitingtime+' secs</h5>';
-        tavgtimes_html='<h5 style="color:white;">Average Turnaround Time: '+avg_turnaround+' secs</h5>';
-        avgtimes.append(wavgtimes_html)
-        avgtimes.append(tavgtimes_html)
+        // var avg_turnaround=turnaround_time_vals.reduce((a, b) => a + b, 0)/turnaround_time_vals.length;
+        // var avg_waitingtime=waiting_time_vals.reduce((a, b) => a + b, 0)/waiting_time_vals.length
+        // avgtimes=$('#resultsChart #AvgTimes');
+        // wavgtimes_html='<h5 style="color:white;">Average Waiting Time: '+avg_waitingtime+' secs</h5>';
+        // tavgtimes_html='<h5 style="color:white;">Average Turnaround Time: '+avg_turnaround+' secs</h5>';
+        // avgtimes.append(wavgtimes_html)
+        // avgtimes.append(tavgtimes_html)
         
         charttime='<td class="animation-time" style="display: table-cell; width:'+100+'px; border-radius: 3px; text-align:left; height: 20px;">'+totalBurstTimeAfterEachProces[totalBurstTimeAfterEachProces.length-1]+' secs</td>'
         AnimationSpaceTime.append(charttime)
     
     
-        sortedturnaround_time=turnaround_time.sort((a, b) => a[0].localeCompare(b[0]));
-        sortedwaiting_time=waiting_time.sort((a, b) => a[0].localeCompare(b[0]));
+        // sortedturnaround_time=turnaround_time.sort((a, b) => a[0].localeCompare(b[0]));
+        // sortedwaiting_time=waiting_time.sort((a, b) => a[0].localeCompare(b[0]));
     
-        addTurn=$('#table_test thead tr');
-        turnaroundcol="<th>Turnaround Time</th>"
-        addTurn.append(turnaroundcol)
-        addTurnVal=$('#table_test tbody tr');
-        // console.log(addTurnVal)
-        for (let i = 0; i < sortedturnaround_time.length; i++){
-            const tr = document.createElement('td');
-            tr.innerHTML=+sortedturnaround_time[i][1];
-            addTurnVal[i].append(tr)
-        }
+        // addTurn=$('#table_test thead tr');
+        // turnaroundcol="<th>Turnaround Time</th>"
+        // addTurn.append(turnaroundcol)
+        // addTurnVal=$('#table_test tbody tr');
+        // // console.log(addTurnVal)
+        // for (let i = 0; i < sortedturnaround_time.length; i++){
+        //     const tr = document.createElement('td');
+        //     tr.innerHTML=+sortedturnaround_time[i][1];
+        //     addTurnVal[i].append(tr)
+        // }
     
-        waitingtime="<th>Waiting Time</th>"
-        addTurn.append(waitingtime)
-        addWaitVal=$('#table_test tbody tr');
-        console.log("sortedwaiting_time: ",sortedwaiting_time);
-        for (let i = 0; i < sortedwaiting_time.length; i++){
-            const tr = document.createElement('td');
-            tr.innerHTML=+sortedwaiting_time[i][1];
-            addWaitVal[i].append(tr)
-        }
+        // waitingtime="<th>Waiting Time</th>"
+        // addTurn.append(waitingtime)
+        // addWaitVal=$('#table_test tbody tr');
+        // console.log("sortedwaiting_time: ",sortedwaiting_time);
+        // for (let i = 0; i < sortedwaiting_time.length; i++){
+        //     const tr = document.createElement('td');
+        //     tr.innerHTML=+sortedwaiting_time[i][1];
+        //     addWaitVal[i].append(tr)
+        // }
     
     }
 
