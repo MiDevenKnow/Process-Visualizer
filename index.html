@@ -28,7 +28,7 @@
                 <a class="nav-link" href="/html/FCFS.html">First Come First Serve (FCFS)</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/html/SJF.html">Shortest Job First (SJF)</a>
+                <a class="nav-link" href="/html/SJF.html">Shortest Job Next (SJN)</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/html/PRIORITY.html">Priority Scheduling</a>
@@ -41,17 +41,100 @@
     </nav>
 
 <div class="container">
-    <br>
-    <br>
-    <br>
-    <br>
-    <div id="intro">
+    <div style="color:white" class="display">
         <h2>GET READY TO SCHEDULE YOUR PROCESSES!</h2>
-        <h3 style="font-size: 17px">SELECT A SCHEDULING PROCESS FROM THE NAV BAR</h3>
+        <h3 style="font-size: 18px">What is a process scheduler? </h3>
+        <br>
+        <p>A Process Scheduler schedules different processes to be assigned to the CPU based on particular scheduling algorithms. </p>
+        
+        <p>Our 4 scheduling algorithms used are: </p>
+        <ul>
+            <li>Non-Preemptive First-Come, First-Served (FCFS) Scheduling</li>
+            <li>Non-Premeptive Shortest-Job-Next (SJN) Scheduling
+            </li>
+            <li>Non-Preemptive Priority Scheduling</li>
+            <li>Preemptive Round Robin(RR) Scheduling</li>
+        </ul>
+        <P>
+            These algorithms are either non-preemptive or preemptive. Non-preemptive algorithms are designed so that once a process enters the running state, it cannot be preempted until it completes its allotted time, whereas the preemptive scheduling is based on priority where a scheduler may preempt a low priority running process anytime when a high priority process enters into a ready state.</p>
+  
+    </div>
+
+    <div style="color:white" class="display">
+        <h2>Non-Preemptive First-Come, First-Served (FCFS) Scheduling</h2>
+
+        <br>
+
+        <p>Outline: </p>
+        <ul>
+            <li>Jobs are executed on first come, first serve basis.</li>
+            <li>It is a non-preemptive, pre-emptive scheduling algorithm.
+            </li>
+            <li>Easy to understand and implement.</li>
+            <li>Poor in performance as average wait time is high.</li>
+        </ul>
+
+  
+    </div>
+
+    <div style="color:white" class="display">
+        <h2>Non-Premeptive Shortest-Job-Next (SJN) Scheduling</h2>
+
+        <br>
+
+        <p>Outline: </p>
+        <ul>
+            <li>This is also known as shortest job first, or SJF</li>
+            <li>This is a non-preemptive, pre-emptive scheduling algorithm.
+            </li>
+            <li>Best approach to minimize waiting time.</li>         
+            <li>Easy to implement in Batch systems where required CPU time is known in advance.</li>
+            <li>Impossible to implement in interactive systems where required CPU time is not known.</li>
+            <li>The processer should know in advance how much time process will take.</li>
+        </ul>
+
+  
+    </div>
+
+    <div style="color:white" class="display">
+        <h2>Non-Preemptive Priority Scheduling</h2>
+
+        <br>
+
+        <p>Outline: </p>
+        <ul>
+            <li>Priority scheduling is a non-preemptive algorithm and one of the most common scheduling algorithms in batch systems.</li>
+            <li>Each process is assigned a priority. Process with highest priority is to be executed first and so on.
+            </li>
+            <li>Processes with same priority are executed on first come first served basis.</li>           
+            <li>Priority can be decided based on memory requirements, time requirements or any other resource requirement.</li>
+        </ul>
+
+  
+    </div>
+
+    <div style="color:white" class="display">
+        <h2>Preemptive Round Robin(RR) Scheduling</h2>
+
+        <br>
+
+        <p>Outline: </p>
+        <ul>
+            <li>Round Robin is the preemptive process scheduling algorithm.</li>
+            <li>Each process is provided a fix time to execute, it is called a quantum.
+            </li>
+            <li>Once a process is executed for a given time period, it is preempted and other process executes for a given time period.
+            </li>           
+            <li>Context switching is used to save states of preempted processes.
+            </li>
+        </ul>
+
+
     </div>
 </div>
 
-
-</div>
+<script type="text/javascript">
+    let displays =  $(".display")
+</script>
 </body>
 </html>
