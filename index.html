@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <link rel="stylesheet" href="/css/index.css">
-    <script type="text/javascript" src="/js/PRIORITY.js"></script>
+
     <title>Process Scheduling Visualizer</title>
 </head>
 
@@ -57,10 +57,9 @@
         </ul>
         <P>
             These algorithms are either non-preemptive or preemptive. Non-preemptive algorithms are designed so that once a process enters the running state, it cannot be preempted until it completes its allotted time, whereas the preemptive scheduling is based on priority where a scheduler may preempt a low priority running process anytime when a high priority process enters into a ready state.</p>
-  
     </div>
 
-    <div style="color:white" class="display">
+    <div style="color:white; display:none" class="display">
         <h2>Non-Preemptive First-Come, First-Served (FCFS) Scheduling</h2>
 
         <br>
@@ -73,11 +72,9 @@
             <li>Easy to understand and implement.</li>
             <li>Poor in performance as average wait time is high.</li>
         </ul>
-
-  
     </div>
 
-    <div style="color:white" class="display">
+    <div style="color:white; display:none" class="display">
         <h2>Non-Premeptive Shortest-Job-Next (SJN) Scheduling</h2>
 
         <br>
@@ -92,11 +89,9 @@
             <li>Impossible to implement in interactive systems where required CPU time is not known.</li>
             <li>The processer should know in advance how much time process will take.</li>
         </ul>
-
-  
     </div>
 
-    <div style="color:white" class="display">
+    <div style="color:white; display:none" class="display">
         <h2>Non-Preemptive Priority Scheduling</h2>
 
         <br>
@@ -109,11 +104,9 @@
             <li>Processes with same priority are executed on first come first served basis.</li>           
             <li>Priority can be decided based on memory requirements, time requirements or any other resource requirement.</li>
         </ul>
-
-  
     </div>
 
-    <div style="color:white" class="display">
+    <div style="color:white; display:none" class="display">
         <h2>Preemptive Round Robin(RR) Scheduling</h2>
 
         <br>
@@ -128,13 +121,50 @@
             <li>Context switching is used to save states of preempted processes.
             </li>
         </ul>
+    </div>
+    <div class="col-6"> 
+        <div class="row">
+            <div class="">
+                <button style="display:none;" id="less" class="btn btn-primary" style="cursor: pointer;">GO BACK</button> 
 
-
+                <button id="more" class="btn btn-primary" style="cursor: pointer;">SEE MORE</button>
+            </div> 
+        </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    let displays =  $(".display")
+    var status = "less";
+    let count = 0; 
+    let more= $("#more");
+    let less= $("#less");
+    let display = $(".display");
+
+    more.click( () =>{
+        if(count != 4){
+            less.show();
+            count++;
+            display.eq(count-1).hide();
+            display.eq(count).show();
+
+            if(count == 4){
+                more.hide();
+            }
+        }
+    });
+
+    less.click( () =>{
+        if(count != 0){
+            more.show();
+            count--;
+            display.eq(count).show();
+            display.eq(count+1).hide();
+
+            if(count == 0){
+                less.hide();
+            }
+        }
+    });
 </script>
 </body>
 </html>
