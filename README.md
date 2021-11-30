@@ -1,1 +1,1 @@
-# Process-Visualizer
+# Process-Scheduling-Visualizer

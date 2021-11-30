@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel="stylesheet" href="/css/index.css">
+    <script type="text/javascript" src="/js/FCFS.js"></script>
+    <title>Process Scheduling Visualizer</title>
+</head>
+
+<canvas id="canvas"> </canvas>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <h1 class="navbar-brand" href="#">Process Scheduling Visualizer</h1>
+        <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="" role="button" ><i class="fa fa-bars" aria-hidden="true" style="color:#e6e6ff"></i></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/html/FCFS.html">First Come First Serve (FCFS)</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/html/SJF.html">Shortest Job First (SJF)</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/html/PRIORITY.html">Priority Scheduling</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/html/RR.html">Round Robin</a>
+            </li> 
+          </ul>
+        </div>
+    </nav>
+
+<div class="container">
+    
+    <div id="intro">
+        <h2>Process Scheduling Algorithm</h2>
+        <h3>Non-Preemptive First Come First Serve</h3>
+    </div>
+
+    <div class="table-responsive mx-auto w-auto">
+        <table class="table table-bordered" id="table_test">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                <th scope="col">Processes</th>
+                <th scope="col">Arrival Time</th>
+                <th scope="col">Burst Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center">
+                <th scope="row" class="processes">P1</th>
+                <td><input class="arrival-time"  type="number" min="0" /></td>
+                <td><input class="burst-time" type="number" min="0" /></td>
+                </tr>
+                <tr class="text-center">
+                <th scope="row" class="processes">P2</th>
+                <td ><input class="arrival-time" type="number" min="0" /></td>
+                <td ><input class="burst-time" type="number" min="0"  /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+
+    <div id="buttondiv" class=" mx-auto w-auto">
+        <button type="button" class="iconbuttons" id="addfield">   
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+            width="46" height="50"
+            viewBox="0 0 171 171"
+            style=" fill:#2ECC71;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,171.99654v-171.99654h171.99654v171.99654z" fill="none"></path><g fill="#3498db"><path d="M85.5,6.84c-43.37586,0 -78.66,35.28414 -78.66,78.66c0,43.37586 35.28414,78.66 78.66,78.66c43.37586,0 78.66,-35.28414 78.66,-78.66c0,-43.37586 -35.28414,-78.66 -78.66,-78.66zM109.44,88.92h-20.52v20.52c0,1.89126 -1.52874,3.42 -3.42,3.42c-1.89126,0 -3.42,-1.52874 -3.42,-3.42v-20.52h-20.52c-1.89126,0 -3.42,-1.52874 -3.42,-3.42c0,-1.89126 1.52874,-3.42 3.42,-3.42h20.52v-20.52c0,-1.89126 1.52874,-3.42 3.42,-3.42c1.89126,0 3.42,1.52874 3.42,3.42v20.52h20.52c1.89126,0 3.42,1.52874 3.42,3.42c0,1.89126 -1.52874,3.42 -3.42,3.42z"></path></g></g></svg>
+        </button>
+
+        <button type="button" class="iconbuttons" id="removefield">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+            width="50" height="50"
+            viewBox="0 0 171 171"
+            style=" fill:#c55959;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,171.99654v-171.99654h171.99654v171.99654z" fill="none"></path><g fill="#e74c3c"><path d="M85.5,14.25c-39.35137,0 -71.25,31.89863 -71.25,71.25c0,39.35138 31.89863,71.25 71.25,71.25c39.35138,0 71.25,-31.89862 71.25,-71.25c0,-39.35137 -31.89862,-71.25 -71.25,-71.25zM106.875,92.625h-42.75c-3.933,0 -7.125,-3.192 -7.125,-7.125c0,-3.933 3.192,-7.125 7.125,-7.125h42.75c3.933,0 7.125,3.192 7.125,7.125c0,3.933 -3.192,7.125 -7.125,7.125z"></path></g></g></svg>
+        </button>
+
+        <button type="button" class="btn btn-primary" id="animation_button">Animate</button>
+        <button type="button" class="btn btn-danger" id="reset_button">Reset</button>
+    </div>
+
+    <br>
+    
+    <div id="Gnattchart" style="display:none;">
+        <table>
+            <tbody>
+                <th>Gnatt Chart</th>
+            </tbody>
+        </table>
+    </div>
+    <div id="resultsChart">
+        <table class="DisplayAnimation">
+            <tbody>
+                <tr id="data">
+                </tr>
+                <tr id="timeData">
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <div id="AvgTimes">
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

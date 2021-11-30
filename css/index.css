@@ -1,0 +1,118 @@
+body {
+  background:black;
+}
+
+.navbar-brand{
+    color: white !important;
+}
+
+.navbar-collapse .navbar-nav .nav-link {
+    color: white;
+    padding-left: 20px;
+}
+
+.navbar-collapse .navbar-nav .nav-item .nav-link:hover{
+    color: rgb(50, 131, 252) ;
+}
+
+nav{
+    margin-bottom:70px;
+}
+
+#canvas {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  left: 0;
+  z-index:-1;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+} 
+
+.iconbuttons{
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: inherit !important;
+}
+
+#buttondiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#addfield{
+    margin-right: -12px;;
+}
+
+#removefield{
+    margin-right: -3px;;
+}
+
+#animation_button{
+    margin-top:-8px;
+}
+
+#reset_button{
+    margin-top: -8px;
+    margin-left:8px;
+}
+table{
+    color: white;
+}
+
+#table_test tbody{
+    background-color: rgb(9, 11, 14);
+}
+
+.table-responsive{
+    width: 40vw ;
+}
+@media screen and (max-width: 540px) {
+    .table-responsive{width: 100% !important;}
+}
+#resultsChart{
+    width: 900px;
+    margin:auto;
+    overflow:hidden;
+}
+
+#intro{
+    color: white;
+    margin: auto;
+    text-align: center;
+    
+}
+
+#intro h2{
+    font-style: italic;
+    font-weight:800;
+    font-size: 27px;
+}
+
+#intro h3{
+    font-style: italic;
+    font-size: 23px;
+}
+
+@keyframes makeItfadeIn {
+    100% {
+      background-position: left;
+    }
+}
+
+input{
+    outline: 0;
+    background: none;
+    border-width: 0 0 2px;
+    width: 50px;
+    text-align: center;
+    color: white;
+}
+
+input:hover, input:focus{
+    border-color: rgb(42, 107, 204);;
+}
