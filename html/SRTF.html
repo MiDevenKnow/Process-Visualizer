@@ -10,15 +10,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <link rel="stylesheet" href="/css/index.css">
-    <script type="text/javascript" src="/js/FCFS.js"></script>
-  
+    <script type="text/javascript" src="/js/SRTF.js"></script>
+    
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
     <link rel="manifest" href="/images/site.webmanifest">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    
+
     <title>Process Scheduling Visualizer</title>
 </head>
 
@@ -55,7 +55,7 @@
     
     <div id="intro">
         <h2>Process Scheduling Algorithm</h2>
-        <h3>Non-Preemptive First Come First Serve</h3>
+        <h3>Preemptive Shortest Remaining Time First</h3>
     </div>
 
     <div class="mx-auto w-auto">
@@ -69,14 +69,14 @@
             </thead>
             <tbody>
                 <tr class="text-center">
-                <th scope="row" class="processes">P1</th>
-                <td><input class="arrival-time"  type="number" min="0" /></td>
-                <td><input class="burst-time" type="number" min="0" /></td>
+                    <th scope="row" class="processes">P1</th>
+                    <td><input class="arrival-time"  type="number" min="0" /></td>
+                    <td><input class="burst-time" type="number" min="0" /></td>
                 </tr>
                 <tr class="text-center">
-                <th scope="row" class="processes">P2</th>
-                <td ><input class="arrival-time" type="number" min="0" /></td>
-                <td ><input class="burst-time" type="number" min="0"  /></td>
+                    <th scope="row" class="processes">P2</th>
+                    <td ><input class="arrival-time" type="number" min="0" /></td>
+                    <td ><input class="burst-time" type="number" min="0"  /></td>
                 </tr>
             </tbody>
         </table>
@@ -104,7 +104,7 @@
     </div>
 
     <br>
-    
+
     <div id="Gnattchart" style="display:none;">
         <table>
             <tbody>
@@ -125,6 +125,7 @@
         <div id="AvgTimes">
         </div>
     </div>
+
 
 </div>
 </body>

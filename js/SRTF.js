@@ -174,25 +174,8 @@ window.onload = function () {
             lastRow.remove();
         }
     });
-    
-    //execute animation one after the other 
-    const sleep = (milliseconds) => {
-        return new Promise(resolve => setTimeout(resolve,milliseconds));
-    }
-    //get values
-    function getValues(){
-        var processes_rows = $(".processes");
-        var burst_times = $(".burst-time");
-        var arrival_times = $(".arrival-time");
-        // console.log(arrival_times);
-        sjf_array=[];
-        for(var i = 0; i < arrival_times.length; i++){
-            sjf_array.push([processes_rows[i].textContent,parseInt($(arrival_times[i]).val()),parseInt($(burst_times[i]).val())])
-        }
-    
-        return sjf_array;
-    }
 
+    //function to copy a variable value
     const deepCopy = (inObject) => {
         let outObject, value, key
       
@@ -212,110 +195,71 @@ window.onload = function () {
       
         return outObject
     }
-
+    
+    //execute animation one after the other 
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve,milliseconds));
+    }
+    //get values
+    function getValues(){
+        var processes_rows = $(".processes");
+        var burst_times = $(".burst-time");
+        var arrival_times = $(".arrival-time");
+        // console.log(arrival_times);
+        sjf_array=[];
+        for(var i = 0; i < arrival_times.length; i++){
+            sjf_array.push([processes_rows[i].textContent,parseInt($(arrival_times[i]).val()),parseInt($(burst_times[i]).val())])
+        }
+    
+        return sjf_array;
+    }
     //animate divs and append html to existing tag
     const animateChart = async()=>{
         let order=[];
         let totalBurstTimeAfterEachProces = [];
         // Sort by arrival time
-        values=getValues().sort((a,b) => a[1] - b[1]);
-
+        values = getValues().sort((a,b) => a[1] - b[1]);
         let firstProcess = values[0];
 
-        let readyQueue = [];
-        let ftime=firstProcess[1];
+        let ftime = firstProcess[1];
         let time = ftime;
-        totalBurstTimeAfterEachProces.push(ftime);
 
-        let quantum = document.getElementById("quantum");
-        quantum = Number(quantum.value);
-        if(quantum < 1){
-            quantum = 3;
-        }
-        console.log("quantum: ",quantum);
-        let check = true;
-        let index = 0;
+        order.push(firstProcess);
 
-        // arrivaltime = [0,5,1,6,8];
-        // bursttime = [8,2,7,3,5];
-        
-
-        if(firstProcess[2] >= quantum){
-            firstProcess[2] = firstProcess[2] - quantum;
-            time += quantum;
-            
+        if(firstProcess[2]>0){
+            firstProcess[2] = firstProcess[2] - 1;
+            time += 1;
         }else{
-            time += firstProcess[2];
             firstProcess[2] = 0;
+            time += 1;
         }
 
-        let pushData =  deepCopy(firstProcess);
-        pushData[1] = time;
+        let readyQueue = [];
 
-        order.push(deepCopy(pushData));
+        if(firstProcess[2] > 0){
+            readyQueue.push(firstProcess);
+        }
 
+        visitedProcess = [];
+        
+        visitedProcess.push(firstProcess[0]);
+
+
+        totalBurstTimeAfterEachProces.push(ftime);
         totalBurstTimeAfterEachProces.push(time);
-  
+
+
         for(let i = 0; i < values.length; i++){
             if(values[i] != firstProcess && values[i][2] != 0 && values[i][1] <= time && (!readyQueue.includes(values[i]) && !order.includes(values[i])) ){
                 readyQueue.push(values[i]);
+                visitedProcess.push(values[i][0]);
             }
         }
+        
+        readyQueue.sort((a,b) => a[2] - b[2]);
 
-        if(values[0][2] != 0){
-            readyQueue.push(values[0]);
-        }
+        let index = 0;
  
-        function getReadyQueue(){
-            //console.log(readyQueue);
-
-            let count = 0;
-            let index = values.indexOf(firstProcess)+1;
-            while(readyQueue.length<1 && !isComplete()){
-              count++;
-          
-                if(values[index][2] != 0 && time+count == values[index][1]){
-                    let empty_space = ['Idle Time','',count];
-                    order.push(empty_space);
-                    readyQueue.push(values[index]);
-                    time += count;
-                    totalBurstTimeAfterEachProces.push(time);
-                    break;
-                }
-            }
-            
-            index = values.indexOf(readyQueue[0]);
-          
-            if(values[index][2] >= quantum){
-              values[index][2] = values[index][2] - quantum;
-              time += quantum;
-              
-            }else{
-              time += values[index][2];
-              values[index][2] = 0;
-            }
-            
-            totalBurstTimeAfterEachProces.push(time);
-            
-            for(let i = 0; i < values.length; i++){
-                if(values[i] != values[index] && values[i][2] != 0 && values[i][1] <= time && (!readyQueue.includes(values[i]) && !order.includes(values[i])) ){
-                    readyQueue.push(values[i]);
-                }
-            }
-            
-            firstProcess = readyQueue.shift();
-            let pushData =  deepCopy(firstProcess);
-            pushData[1] = time;
-            console.log("Data: ",pushData);
-            //console.log("First Process: ",firstProcess)
-            console.log(totalBurstTimeAfterEachProces);
-            if(firstProcess[2] > 0){
-              readyQueue.push(firstProcess);
-            }
-            order.push(pushData);
-            index = values.indexOf(readyQueue[0]);
-        }
-
         function isComplete(){
             let complete = true;
             for(let i = 0; i < values.length; i++){
@@ -326,30 +270,93 @@ window.onload = function () {
             }
             return complete;
         }
+          
+        function getReadyQueue(){
+          let count = 0;
+
+          for(let i=0; i < values.length; i++){
+              if(values[i][2] > 0){
+                  index = i;
+                  break;
+              }
+          }
+
+          while(readyQueue.length<1 && !isComplete()){
+            count++;
+        
+              if(values[index][2] != 0 && time+count == values[index][1]){
+                  let empty_space = ['Idle Time','',count];
+                  order.push(empty_space);
+                  readyQueue.push(values[index]);
+                  time += count;
+                  totalBurstTimeAfterEachProces.push(time);
+                  break;
+              }
+          }
+          
+
+          if(visitedProcess.length != values.length){
+            let nextProcess = readyQueue[0];
+            index = values.indexOf(nextProcess);
+            
+            if(nextProcess[2] > 0){
+              time += 1;
+              values[index][2] = values[index][2] - 1;
+              
+              if(readyQueue[0][2] == 0){
+                    firstProcess = readyQueue.shift();
+              }
+              
+              totalBurstTimeAfterEachProces.push(time);
+
+              order.push(nextProcess);
+              for(let i = 0; i < values.length; i++){
+                if(values[i] != nextProcess && values[i][2] != 0 && values[i][1] <= time && (!readyQueue.includes(values[i]) && !order.includes(values[i])) ){
+                  readyQueue.push(values[i]);
+                  if(!visitedProcess.includes(values[i][0])){
+                    visitedProcess.push(values[i][0]);
+                  }
+                }
+              }
+            }
+            readyQueue.sort((a,b) => a[2] - b[2]);
+          }else{
+            for(let i = 0; i < readyQueue.length; i++){
+              index = values.indexOf(readyQueue[i]);
+              time += values[index][2];
+              values[index][2] = 0;
+
+              order.push(deepCopy(values[index]));
+              totalBurstTimeAfterEachProces.push(time);
+            }
+          }
+        }
+
+//      arrivaltime = [2,1,4,0,2];
+//      bursttime = [1,5,1,6,3];
 
         complete = isComplete();
 
         while(!complete){
-          getReadyQueue();
-          complete = isComplete();
+            getReadyQueue();
+            complete = isComplete();
         }
+
+        for(let x = 0; x < order.length; x++){
+            order[x][2] = totalBurstTimeAfterEachProces[x+1] - totalBurstTimeAfterEachProces[x];
+        }
+
+        console.log("order: ",order)
 
         turnaround_time=[]
         waiting_time=[]
         turnaround_time_vals=[]
         waiting_time_vals=[]
         // console.log(order);
-        // console.log(totalBurstTimeAfterEachProces);
+        console.log(totalBurstTimeAfterEachProces);
         AnimationSpaceTime=$("#timeData");
         AnimationSpace=$("#data");
-        // AnimationSpace.append(la);
         // console.log(val)
-
-        for(let x = 0; x < order.length; x++){
-            order[x][2] = totalBurstTimeAfterEachProces[x+1] - totalBurstTimeAfterEachProces[x];
-        }
-
-
         for (let i = 0; i < order.length; i++) {
             chart='<th class="animation-added" style="display: table-cell; color:black; width:'+((order[i][2]*50)+55)+'px; border: 1px solid black; border-radius: 3px; text-align:center; height: 60px; background: linear-gradient(to right, '+CSS_COLOR_NAMES[Math.floor(Math.random()*CSS_COLOR_NAMES.length)]+' 50%, transparent 0); background-size: 200% 100%; background-position: right; animation: makeItfadeIn '+order[i][2]+'s 1s forwards;">'+order[i][0]+' </th>'
             AnimationSpace.append(chart)
@@ -398,7 +405,6 @@ window.onload = function () {
         // waitingtime="<th>Waiting Time</th>"
         // addTurn.append(waitingtime)
         // addWaitVal=$('#table_test tbody tr');
-        // console.log("sortedwaiting_time: ",sortedwaiting_time);
         // for (let i = 0; i < sortedwaiting_time.length; i++){
         //     const tr = document.createElement('td');
         //     tr.innerHTML=+sortedwaiting_time[i][1];

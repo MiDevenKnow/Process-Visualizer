@@ -8,8 +8,16 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/background.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <link rel="stylesheet" href="/css/index.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 
     <title>Process Scheduling Visualizer</title>
 </head>
@@ -36,6 +44,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/html/RR.html">Round Robin</a>
             </li> 
+            <li class="nav-item">
+                <a class="nav-link" href="/html/SRTF.html">Shortest Remaining Time First</a>
+            </li> 
           </ul>
         </div>
     </nav>
@@ -43,17 +54,19 @@
 <div class="container">
     <div style="color:white" class="display">
         <h2>GET READY TO SCHEDULE YOUR PROCESSES!</h2>
-        <h3 style="font-size: 18px">What is a process scheduler? </h3>
         <br>
-        <p>A Process Scheduler schedules different processes to be assigned to the CPU based on particular scheduling algorithms. </p>
+        <h3 style="font-size: 18px">What is a process scheduling? </h3>
+        <br>
+        <p>Process scheduling is the act in which a process scheduler schedules different processes to be assigned to the CPU based on particular scheduling algorithms. </p>
         
-        <p>Our 4 scheduling algorithms used are: </p>
+        <p>Our 5 scheduling algorithms used are: </p>
         <ul>
             <li>Non-Preemptive First-Come, First-Served (FCFS) Scheduling</li>
             <li>Non-Premeptive Shortest-Job-Next (SJN) Scheduling
             </li>
             <li>Non-Preemptive Priority Scheduling</li>
             <li>Preemptive Round Robin(RR) Scheduling</li>
+            <li>Preemptive Shortest Remaining Time First Scheduling</li>
         </ul>
         <P>
             These algorithms are either non-preemptive or preemptive. Non-preemptive algorithms are designed so that once a process enters the running state, it cannot be preempted until it completes its allotted time, whereas the preemptive scheduling is based on priority where a scheduler may preempt a low priority running process anytime when a high priority process enters into a ready state.</p>
@@ -122,10 +135,26 @@
             </li>
         </ul>
     </div>
+
+    <div style="color:white; display:none" class="display">
+        <h2>Preemptive Shortest Remaining Time First Scheduling</h2>
+
+        <br>
+
+        <p>Outline: </p>
+        <ul>
+            <li>Shortest remaining time (SRT) is the preemptive version of the SJN algorithm.</li>
+            <li>The processor is allocated to the job closest to completion but it can be preempted by a newer ready job with shorter time to completion.</li>
+            <li>Impossible to implement in interactive systems where required CPU time is not known.</li>           
+            <li>It is often used in batch environments where short jobs need to give preference.</li>
+        </ul>
+    </div>
+
+
     <div class="col-12"> 
         <div class="row">
             <div style="display:inline-block">
-                <button style="display:none;" id="less" class="btn btn-primary" style="cursor: pointer;">GO BACK</button> 
+                <button style="display:none;margin-right:20px" id="less" class="btn btn-primary" style="cursor: pointer;">GO BACK</button> 
 
                 <button id="more" class="btn btn-primary" style="cursor: pointer;">SEE MORE</button>
             </div> 
@@ -143,13 +172,13 @@
     let display = $(".display");
 
     more.click( () =>{
-        if(count != 4){
+        if(count != 5){
             less.show();
             count++;
             display.eq(count-1).hide();
             display.eq(count).show();
 
-            if(count == 4){
+            if(count == 5){
                 more.hide();
             }
         }
